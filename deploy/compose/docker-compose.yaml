@@ -12,9 +12,6 @@ services:
     volumes:
       - ./nats_data:/tmp/nats/jetstream
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.2
     profiles: [nats]
   #/* -------------------------------------------------------------------------- */
 
@@ -30,9 +27,6 @@ services:
       - .env.controller
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.3
     profiles: [controller]
   #/* -------------------------------------------------------------------------- */
 
@@ -42,9 +36,6 @@ services:
     container_name: mongo_usp
     ports:
       - 27017:27017
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.4
     volumes:
       - ./mongo_data:/data/db
     profiles: [controller, adapter]
@@ -62,9 +53,6 @@ services:
       - .env.mqtt
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.6
     profiles: [mqtt]
 
   ws:
@@ -77,9 +65,6 @@ services:
       - .env.ws
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.7
     profiles: [ws]
 
   stomp:
@@ -87,9 +72,6 @@ services:
     container_name: stomp
     ports:
       - 61613:61613
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.8
     profiles: [stomp]
   #/* -------------------------------------------------------------------------- */
 
@@ -103,9 +85,6 @@ services:
       - .env.mqtt-adapter
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.9
     profiles: [mqtt]
 
   ws-adapter:
@@ -117,9 +96,6 @@ services:
       - .env.ws-adapter
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.10
     profiles: [ws]
 
   stomp-adapter:
@@ -131,9 +107,6 @@ services:
       - .env.stomp-adapter
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.11
     profiles: [stomp]
 
   adapter:
@@ -145,9 +118,6 @@ services:
       - .env.adapter
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.12
     profiles: [adapter]
   #/* -------------------------------------------------------------------------- */
 
@@ -161,9 +131,6 @@ services:
       - .env.socketio
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.13
     profiles: [frontend]
   #/* -------------------------------------------------------------------------- */
 
@@ -173,9 +140,6 @@ services:
     container_name: frontend
     ports:
       - 3030:3000
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.14
     profiles: [frontend]
   #/* -------------------------------------------------------------------------- */
 
@@ -184,9 +148,6 @@ services:
     container_name: portainer
     ports:
       - 9443:9443
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.15
     profiles: [portainer]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -201,9 +162,6 @@ services:
       - .env.acs
     volumes:
       - ./nats_config:/tmp/nats/config
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.16
     profiles: [cwmp]
 
   nginx:
@@ -215,9 +173,6 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.17
 
   file-server:
     image: oktopusp/file-server
@@ -229,9 +184,6 @@ services:
       - ./images:/app/images
     env_file:
       - .env.file-server
-    networks:
-      usp_network:
-        ipv4_address: 172.16.235.18
 
 networks:
   usp_network:
