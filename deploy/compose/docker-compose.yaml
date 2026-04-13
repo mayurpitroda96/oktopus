@@ -168,7 +168,7 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - 8090:80
+      - 8090:8090
     volumes:
       - /home/oktopus/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     extra_hosts:
