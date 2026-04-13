@@ -172,7 +172,7 @@ services:
     image: "oktopusp/frontend"
     container_name: frontend
     ports:
-      - 3000:3000
+      - 3030:3000
     networks:
       usp_network:
         ipv4_address: 172.16.235.14
